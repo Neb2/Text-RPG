@@ -53,17 +53,8 @@ def loot1(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.GREEN + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-            # time.sleep(2.3)
-            # if character.win_music_2:
-            #     winsound.PlaySound("music\\battle_victory_loop.wav", winsound.SND_ASYNC + winsound.SND_LOOP)
-            #     character.win_music_2 = False
-            #     character.town_zone = True
-            #     character.forest_zone = True
-            #     character.water_zone = True
-            #     character.desert_zone = True
-            #     character.cave_zone = True
             option = input("> ")
-            if option == "y":
+            if option.lower() == "y":
                 if x in character.player_weapons or x in character.player_armour:
                     print("You already have {}, you should leave it for someone else.".format(Colours.BOLD +Colours.GREEN + x + Colours.END))
                 else:
