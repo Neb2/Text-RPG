@@ -1,13 +1,14 @@
-# Changelog
+Changelog
+=
 
 [Unreleased]
 -
 Version 1.1 - TBC
 -
-###Added
+#### Added
 - ...
 
-###Changes
+#### Changes
 - ... 
 
 [Released]
