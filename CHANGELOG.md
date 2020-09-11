@@ -6,10 +6,11 @@ Changelog
 Version 1.1 - TBC
 -
 #### Added
-- ...
+- Added a must enter Y/N for loot.
 
 #### Changes
-- ... 
+- Fixed upper/lowercase input on picking up loot.
+- Movement system revamped.
 
 [Released]
 -
