@@ -5,7 +5,7 @@
 ###Added
 - ...
 
-###Changes
+##Changes
 - ... 
 
 ##[Released]
