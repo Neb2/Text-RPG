@@ -372,38 +372,73 @@ class Map:
 
 
 # allows the player to move direction
-def move(character, en1):
-    print("Where do you want to move to?\n")
-    print("Options = (W, A, S, D)")
-    direction = input("> ")
-    if direction in ['W', "w"]:
-        destination = Map.zone_map[character.location][Map.UP]
-        if destination == "":
-            print("You can't go that way.")
-            move(character, en1)
-        else:
-            movement_handler(destination, character, en1)
-    elif direction in ['A', "a"]:
-        destination = Map.zone_map[character.location][Map.LEFT]
-        if destination == "":
-            print("You can't go that way.")
-            move(character, en1)
-        else:
-            movement_handler(destination, character, en1)
-    elif direction in ['D', "d"]:
-        destination = Map.zone_map[character.location][Map.RIGHT]
-        if destination == "":
-            print("You can't go that way.")
-            move(character, en1)
-        else:
-            movement_handler(destination, character, en1)
-    elif direction in ['S', "s"]:
-        destination = Map.zone_map[character.location][Map.DOWN]
-        if destination == "":
-            print("You can't go that way.")
-            move(character, en1)
-        else:
-            movement_handler(destination, character, en1)
+def move_w(character, en1):
+    from data.menu import game_menu
+    # print("Where do you want to move to?\n")
+    # print("Options = (W, A, S, D)")
+    # direction = input("> ")
+    # if direction in ['W', "w"]:
+    destination = Map.zone_map[character.location][Map.UP]
+    if destination == "":
+        print("You can't go that way.")
+        input(">...")
+        game_menu(character, en1)
+    else:
+        movement_handler(destination, character, en1)
+    # elif direction in ['A', "a"]:
+    #     destination = Map.zone_map[character.location][Map.LEFT]
+    #     if destination == "":
+    #         print("You can't go that way.")
+    #         move(character, en1)
+    #     else:
+    #         movement_handler(destination, character, en1)
+    # elif direction in ['D', "d"]:
+    #     destination = Map.zone_map[character.location][Map.RIGHT]
+    #     if destination == "":
+    #         print("You can't go that way.")
+    #         move(character, en1)
+    #     else:
+    #         movement_handler(destination, character, en1)
+    # elif direction in ['S', "s"]:
+    #     destination = Map.zone_map[character.location][Map.DOWN]
+    #     if destination == "":
+    #         print("You can't go that way.")
+    #         move(character, en1)
+    #     else:
+    #         movement_handler(destination, character, en1)
+
+
+def move_a(character, en1):
+    from data.menu import game_menu
+    destination = Map.zone_map[character.location][Map.LEFT]
+    if destination == "":
+        print("You can't go that way.")
+        input(">...")
+        game_menu(character, en1)
+    else:
+        movement_handler(destination, character, en1)
+
+
+def move_s(character, en1):
+    from data.menu import game_menu
+    destination = Map.zone_map[character.location][Map.DOWN]
+    if destination == "":
+        print("You can't go that way.")
+        input(">...")
+        game_menu(character, en1)
+    else:
+        movement_handler(destination, character, en1)
+
+
+def move_d(character, en1):
+    from data.menu import game_menu
+    destination = Map.zone_map[character.location][Map.RIGHT]
+    if destination == "":
+        print("You can't go that way.")
+        input(">...")
+        game_menu(character, en1)
+    else:
+        movement_handler(destination, character, en1)
 
 
 # handles player movement

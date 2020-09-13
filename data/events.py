@@ -43,6 +43,11 @@ def events(character):
                   "ambushed when doing so.")
             input(">...")
             enemy_gen(character)
+    # if character.location == "d7":
+    #     if character.d7_event_1:
+    #         print("testtesttest")
+    #         input(">...")
+    #         event_check(character)
 
 
 def event_check(character):
@@ -67,3 +72,6 @@ def event_check(character):
     if character.location == "q10":
         if character.q10_event_1:
             character.q10_event_1 = False
+    # if character.location == "d7":
+    #     if character.d7_event_1:
+    #         character.d7_event_1 = False

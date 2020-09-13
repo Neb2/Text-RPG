@@ -1,4 +1,5 @@
 import random
+import os
 from data.art import Colours
 from data.item_rarity import Item_Rarity
 
@@ -11,23 +12,23 @@ class Loot:
 
 
 # loot1
-Loot.forest_mob_drops = {"[Wooden Sword] + (10 ATK)": 30,
-                         "[Leather Armour Set] + (20 HP/2 DF)": 50}
+Loot.forest_mob_drops = {"[Wooden Sword] + (10 ATK)": 50,
+                         "[Leather Armour Set] + (20 HP/2 DF)": 30}
 # loot2
-Loot.water_mob_drops = {"[Bronze Sword] + (15 ATK)": 60,
-                        "[Bronze Armour] + (20 HP/4 DF)": 100}
+Loot.water_mob_drops = {"[Bronze Sword] + (15 ATK)": 100,
+                        "[Bronze Armour] + (20 HP/4 DF)": 60}
 
 # loot3
-Loot.desert_mob_drops1 = {"[Steel Sword] + (30 ATK)": 200,
-                          "[Steel Armour Set] + (50 HP/6 DF)": 250}
-Loot.desert_mob_drops2 = {"[Rune Sword] + (40 ATK)": 500, "[Rune Armour Set] + (60 HP/8 DF)": 500}
+Loot.desert_mob_drops1 = {"[Steel Sword] + (30 ATK)": 300,
+                          "[Steel Armour Set] + (50 HP/6 DF)": 200}
+Loot.desert_mob_drops2 = {"[Rune Sword] + (40 ATK)": 750, "[Rune Armour Set] + (60 HP/8 DF)": 500}
 
 # loot4
-Loot.cave_mob_drops1 = {"[Rune Sword] + (40 ATK)": 500, "[Rune Armour Set] + (60 HP/8 DF)": 500}
-Loot.cave_mob_drops2 = {"[Dragon Sword] + (60 ATK)": 1000, "[Dragon Armour Set] + (80 HP/10 DF)": 1500}
+Loot.cave_mob_drops1 = {"[Rune Sword] + (40 ATK)": 750, "[Rune Armour Set] + (60 HP/8 DF)": 500}
+Loot.cave_mob_drops2 = {"[Dragon Sword] + (60 ATK)": 1500, "[Dragon Armour Set] + (80 HP/10 DF)": 1000}
 
 # boss
-Loot.baron_of_hell1 = {"[Dragon Sword] + (60 ATK)": 1000, "[Dragon Armour Set] + (80 HP/10 DF)": 1500}
+Loot.baron_of_hell1 = {"[Dragon Sword] + (60 ATK)": 1500, "[Dragon Armour Set] + (80 HP/10 DF)": 1000}
 Loot.baron_of_hell2 = {"[Sunfury, Cursed Axe of the Breezeseeker] + (100 ATK)": 0, "[The Baron's Armour] + (100/15 DF)": 0}
 
 # boss
@@ -53,18 +54,33 @@ def loot1(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.GREEN + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-            option = input("> ")
-            if option.lower() == "y":
+            choice = input("> ")
+            if choice.lower() == "y":
                 if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD +Colours.GREEN + x + Colours.END))
+                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
                 else:
                     print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
                     if x in Item_Rarity.uncommon_weapons:
                         character.player_weapons.update({Loot.item})
                     elif x in Item_Rarity.uncommon_armour:
                         character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
+            elif choice.lower() == "n":
                 print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                        if x in Item_Rarity.uncommon_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.uncommon_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
             del Loot.drop[remove]
     input(">...")
 
@@ -85,18 +101,22 @@ def loot2(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.GREEN + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-                    if x in Item_Rarity.uncommon_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.uncommon_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                        if x in Item_Rarity.uncommon_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.uncommon_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
             del Loot.drop[remove]
     input(">...")
 
@@ -117,18 +137,22 @@ def loot3(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.GREEN + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
-                    if x in Item_Rarity.uncommon_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.uncommon_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
+                        if x in Item_Rarity.uncommon_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.uncommon_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.GREEN + x + Colours.END))
             del Loot.drop[remove]
 
     elif loot_chance in range(96, 101):
@@ -140,18 +164,22 @@ def loot3(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.BLUE + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
-                    if x in Item_Rarity.rare_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.rare_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
+                        if x in Item_Rarity.rare_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.rare_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
             del Loot.drop[remove]
     input(">...")
 
@@ -172,19 +200,23 @@ def loot4(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.BLUE + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(
-                        Colours.BLUE + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
-                    if x in Item_Rarity.rare_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.rare_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(
+                            Colours.BLUE + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
+                        if x in Item_Rarity.rare_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.rare_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.BLUE + x + Colours.END))
             del Loot.drop[remove]
 
     elif loot_chance in range(96, 101):
@@ -197,18 +229,22 @@ def loot4(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.PURPLE + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-                    if x in Item_Rarity.epic_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.epic_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+                        if x in Item_Rarity.epic_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.epic_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
             del Loot.drop[remove]
     input(">...")
 
@@ -234,18 +270,22 @@ def baron_loot(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.PURPLE + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
-                    if x in Item_Rarity.epic_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.epic_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
+                        if x in Item_Rarity.epic_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.epic_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.PURPLE + x + Colours.END))
             del Loot.drop[remove]
     elif loot_chance in range(96, 101):
 
@@ -257,18 +297,22 @@ def baron_loot(character, en1):
             remove = x
             print("{} dropped {}.".format(en1.name, Colours.BOLD + Colours.ORANGE + x + Colours.END))
             print("Would you like to pick up {}? Y/N".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
-            option = input("> ")
-            if option == "y":
-                if x in character.player_weapons or x in character.player_armour:
-                    print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
-                else:
-                    print("You picked up {}.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
-                    if x in Item_Rarity.legendary_weapons:
-                        character.player_weapons.update({Loot.item})
-                    elif x in Item_Rarity.legendary_armour:
-                        character.player_armour.update({Loot.item})
-            elif option.lower() == "n":
-                print("You didn't pick up {}.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
+            choice = input("> ")
+            options = ["y", "n"]
+            while choice.lower() not in options:
+                print("You must enter Y or N.")
+                choice = input("> ")
+                if choice.lower() == "y":
+                    if x in character.player_weapons or x in character.player_armour:
+                        print("You already have {}, you should leave it for someone else.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
+                    else:
+                        print("You picked up {}.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
+                        if x in Item_Rarity.legendary_weapons:
+                            character.player_weapons.update({Loot.item})
+                        elif x in Item_Rarity.legendary_armour:
+                            character.player_armour.update({Loot.item})
+                elif choice.lower() == "n":
+                    print("You didn't pick up {}.".format(Colours.BOLD + Colours.ORANGE + x + Colours.END))
             del Loot.drop[remove]
     input(">...")
     if character.r10_event_2:
@@ -280,3 +324,12 @@ def baron_loot(character, en1):
             print("It will be a long walk back...")
             input(">...")
         character.r10_event_2 = False
+
+
+def gold_cheat(character, en1):
+    from data.menu import game_menu
+    os.system("cls")
+    print("Cheat Activated: + 1000 Gold")
+    input(">...")
+    character.gold += 1000
+    game_menu(character, en1)

@@ -4,6 +4,7 @@
 # VERSIONS
 # 0.0 - 20/06/2020
 # 1.0 - 10/09/2020
+# 1.1 - xx/xx/2020
 
 import sys
 import os
@@ -30,6 +31,7 @@ def main(character, en1):
 
 
 def title_screen_selection(character, en1):
+    maximize_console()
     os.system("cls")
     title_art()
     option = input("> ")
@@ -87,5 +89,5 @@ def help_menu(character, en1):
     title_screen_selection(character, en1)
 
 
-# intro(sys.argv)
-main(sys.argv, sys.argv[0])
+title_screen_selection(sys.argv, sys.argv[0])
+# main(sys.argv, sys.argv[0])

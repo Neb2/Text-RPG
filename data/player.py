@@ -70,6 +70,10 @@ class Player:
         self.q10_event_1 = True
         self.r10_event_1 = True
         self.r10_event_2 = False
+        self.d3_d4_map = False
+        self.f6_g6_map = False
+        self.j6_k6_map = False
+        self.n6_o7_map = False
         self.title_screen = True
         self.story_intro = True
         self.town_zone = True
@@ -100,6 +104,8 @@ class Player:
             current_atk += 40
         if self.current_weapon == "[Dragon Sword] + (60 ATK)":
             current_atk += 60
+        if self.current_weapon == "[General Store Sword] + (80 ATK)":
+            current_atk += 80
         if self.current_weapon == "[Sunfury, Cursed Axe of the Breezeseeker] + (100 ATK)":
             current_atk += 100
         return current_atk
@@ -120,6 +126,8 @@ class Player:
             base_hp += 60
         if self.current_armour == "[Dragon Armour Set] + (80 HP/10 DF)":
             base_hp += 80
+        if self.current_armour == "[General Store Armour Set] (90 HP/12 DF)":
+            base_hp += 90
         if self.current_armour == "[The Baron's Armour] + (100/15 DF)":
             base_hp += 100
         return base_hp
@@ -140,6 +148,8 @@ class Player:
             hp_max += 60
         if self.current_armour == "[Dragon Armour Set] + (80 HP/10 DF)":
             hp_max += 80
+        if self.current_armour == "[General Store Armour Set] (90 HP/12 DF)":
+            hp_max += 90
         if self.current_armour == "[The Baron's Armour] + (100/15 DF)":
             hp_max += 100
         return hp_max
@@ -160,6 +170,8 @@ class Player:
             current_defence += 8
         if self.current_armour == "[Dragon Armour Set] + (80 HP/10 DF)":
             current_defence += 10
+        if self.current_armour == "[General Store Armour Set] (90 HP/12 DF)":
+            current_defence += 12
         if self.current_armour == "[The Baron's Armour] + (100/15 DF)":
             current_defence += 15
         return current_defence

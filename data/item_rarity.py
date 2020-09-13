@@ -7,7 +7,7 @@ class Item_Rarity:
     rare_weapons = ["[Rune Sword] + (40 ATK)"]
 
     # epic - purple
-    epic_weapons = ["[Dragon Sword] + (60 ATK)"]
+    epic_weapons = ["[Dragon Sword] + (60 ATK)",  "[General Store Sword] + (80 ATK)"]
 
     # legendary - orange
     legendary_weapons = ["[Sunfury, Cursed Axe of the Breezeseeker] + (100 ATK)"]
@@ -20,7 +20,7 @@ class Item_Rarity:
     rare_armour = ["[Rune Armour Set] + (60 HP/8 DF)"]
 
     # epic - purple
-    epic_armour = ["[Dragon Armour Set] + (80 HP/10 DF)"]
+    epic_armour = ["[Dragon Armour Set] + (80 HP/10 DF)", "[General Store Armour Set] (90 HP/12 DF)"]
 
     # legendary - orange
     legendary_armour = ["[The Baron's Armour] + (100/15 DF)"]

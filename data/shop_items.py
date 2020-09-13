@@ -1,6 +1,9 @@
 import os
+import sys
 from data.item_rarity import Item_Rarity
 from data.art import Colours
+
+sys.setrecursionlimit(10**6)  # test
 
 
 class Shop:
@@ -27,15 +30,17 @@ class Potions:
     plus_def = Items(Colours.BOLD + Colours.ORANGE + "[Defence Potion]" + Colours.END, 1, "+ 1 DEF       ", 1000)
 
 
-Shop.sell_weapons = {"[Wooden Sword] + (10 ATK)": 30,
-                     "[Bronze Sword] + (15 ATK)": 60,
-                     "[Iron Sword] + (20 ATK)": 100,
-                     "[Rune Sword] + (40 ATK)": 500}
+Shop.sell_weapons = {"[Wooden Sword] + (10 ATK)": 50,
+                     "[Bronze Sword] + (15 ATK)": 100,
+                     "[Iron Sword] + (20 ATK)": 200,
+                     "[Rune Sword] + (40 ATK)": 750,
+                     "[General Store Sword] + (80 ATK)": 3000}
 
-Shop.sell_armour = {"[Leather Armour Set] + (20 HP/2 DF)": 50,
-                    "[Bronze Armour] + (20 HP/4 DF)": 100,
-                    "[Iron Armour Set] + (40 HP/5 DF)": 200,
-                    "[Rune Armour Set] + (50 HP/8 DF)": 750}
+Shop.sell_armour = {"[Leather Armour Set] + (20 HP/2 DF)": 30,
+                    "[Bronze Armour] + (20 HP/4 DF)": 60,
+                    "[Iron Armour Set] + (40 HP/5 DF)": 100,
+                    "[Rune Armour Set] + (50 HP/8 DF)": 500,
+                    "[General Store Armour Set] (90 HP/12 DF)": 2000}
 
 
 def shop(character, en1):
@@ -44,6 +49,7 @@ def shop(character, en1):
     print("Hello {}! Welcome to the General Store, how may I help you today?".format(character.name))
     print("1.) Buy")
     print("2.) Sell")
+    print("Press [Enter] to exit the shop.")
     choice = input("> ")
     if choice == "1":
         print("1.) Weapons")
@@ -85,12 +91,16 @@ def buy_weapons(character, en1):
             print("#", Colours.BOLD + Colours.GREEN + Shop.x + Colours.END, "-", Shop.y, "Gold.")
         if Shop.x in Item_Rarity.rare_weapons:
             print("#", Colours.BOLD + Colours.BLUE + Shop.x + Colours.END, "-", Shop.y, "Gold.")
+        if Shop.x in Item_Rarity.epic_weapons:
+            print("#", Colours.BOLD + Colours.PURPLE + Shop.x + Colours.END, "-", Shop.y, "Gold.")
     option = input("> ")
     if option in character.player_weapons:
         if option in Item_Rarity.uncommon_weapons:
             print("You already have a " + Colours.BOLD + Colours.GREEN + "{}".format(option) + Colours.END + ", what's wrong with the one you already have?")
         if option in Item_Rarity.rare_weapons:
             print("You already have a " + Colours.BOLD + Colours.BLUE + "{}".format(option) + Colours.END + ", what's wrong with the one you already have?")
+        if option in Item_Rarity.epic_weapons:
+            print("You already have a " + Colours.BOLD + Colours.PURPLE + "{}".format(option) + Colours.END + ", what's wrong with the one you already have?")
         input(">...")
         buy_weapons(character, en1)
     if option in Shop.sell_weapons:
@@ -98,16 +108,20 @@ def buy_weapons(character, en1):
         if character.gold >= Shop.sell_weapons[option]:
             if option in Item_Rarity.uncommon_weapons:
                 print("Are you sure you want to buy " + Colours.BOLD + Colours.GREEN + option + Colours.END + " for {} gold? Y/N".format(price))
-            elif option in Item_Rarity.rare_weapons:
+            if option in Item_Rarity.rare_weapons:
                 print("Are you sure you want to buy " + Colours.BOLD + Colours.BLUE + option + Colours.END + " for {} gold? Y/N".format(price))
+            if option in Item_Rarity.epic_weapons:
+                print("Are you sure you want to buy " + Colours.BOLD + Colours.PURPLE + option + Colours.END + " for {} gold? Y/N".format(price))
             option1 = input("> ")
             if option1.lower() == "y":
                 character.player_weapons[option] = price
                 character.gold -= price
                 if option in Item_Rarity.uncommon_weapons:
                     print("You bought " + Colours.BOLD + Colours.GREEN + option + Colours.END + ".")
-                elif option in Item_Rarity.rare_weapons:
+                if option in Item_Rarity.rare_weapons:
                     print("You bought " + Colours.BOLD + Colours.BLUE + option + Colours.END + ".")
+                if option in Item_Rarity.epic_weapons:
+                    print("You bought " + Colours.BOLD + Colours.PURPLE + option + Colours.END + ".")
                 input(">...")
                 shop(character, en1)
             elif option1.lower() == "n":
@@ -135,6 +149,8 @@ def buy_armour(character, en1):
             print("#", Colours.BOLD + Colours.GREEN + Shop.x + Colours.END, "-", Shop.y, "Gold.")
         if Shop.x in Item_Rarity.rare_armour:
             print("#", Colours.BOLD + Colours.BLUE + Shop.x + Colours.END, "-", Shop.y, "Gold.")
+        if Shop.x in Item_Rarity.epic_armour:
+            print("#", Colours.BOLD + Colours.PURPLE + Shop.x + Colours.END, "-", Shop.y, "Gold.")
     option = input("> ")
     if option in character.player_armour:
         if option in Item_Rarity.uncommon_armour:
@@ -143,6 +159,9 @@ def buy_armour(character, en1):
         if option in Item_Rarity.rare_armour:
             print("You already have a " + Colours.BOLD + Colours.BLUE + "{}".format(option) + Colours.END +
                   ", what is wrong with the one you already have?")
+        if option in Item_Rarity.epic_armour:
+            print("You already have a " + Colours.BOLD + Colours.PURPLE + "{}".format(option) + Colours.END +
+                  ", what is wrong with the one you already have?")
         input(">...")
         buy_armour(character, en1)
     if option in Shop.sell_armour:
@@ -150,16 +169,20 @@ def buy_armour(character, en1):
         if character.gold >= Shop.sell_armour[option]:
             if option in Item_Rarity.uncommon_armour:
                 print("Are you sure you want to buy " + Colours.BOLD + Colours.GREEN + option + Colours.END + " for {} gold? Y/N".format(price))
-            elif option in Item_Rarity.rare_armour:
+            if option in Item_Rarity.rare_armour:
                 print("Are you sure you want to buy " + Colours.BOLD + Colours.BLUE + option + Colours.END + " for {} gold? Y/N".format(price))
+            if option in Item_Rarity.epic_armour:
+                print("Are you sure you want to buy " + Colours.BOLD + Colours.PURPLE + option + Colours.END + " for {} gold? Y/N".format(price))
             option1 = input("> ")
             if option1.lower() == "y":
                 character.player_armour[option] = price
                 character.gold -= price
                 if option in Item_Rarity.uncommon_armour:
                     print("You bought " + Colours.BOLD + Colours.GREEN + option + Colours.END + ".")
-                elif option in Item_Rarity.rare_armour:
+                if option in Item_Rarity.rare_armour:
                     print("You bought " + Colours.BOLD + Colours.BLUE + option + Colours.END + ".")
+                if option in Item_Rarity.epic_armour:
+                    print("You bought " + Colours.BOLD + Colours.PURPLE + option + Colours.END + ".")
                 input(">...")
                 shop(character, en1)
             elif option1.lower() == "n":

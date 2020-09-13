@@ -93,8 +93,8 @@ def title_art():
   3 o  ╩ ╩└─┘┴─┘┴                                                                       
        ╔═╗─┐ ┬┬┌┬┐                                                                      Github:
        ║╣ ┌┴┬┘│ │                                                                       https://github.com/Neb2/Text-RPG
-  4 o  ╚═╝┴ └─┴ ┴                                                                                                                              
-                                                                                        Version 1.0                                                                                              
+  4 o  ╚═╝┴ └─┴ ┴                                                    
+                                                                                        Version 1.1                                                                   
                                             ''')
 
 

@@ -2,20 +2,22 @@ import os
 import sys
 from data.art import Colours
 from data.display_map import print_map_town
+from data.loot import gold_cheat
 from data.music import game_menu_music
 from data.item_rarity import Item_Rarity
 from data.events import events
-from data.game_map import move
+from data.game_map import move_w, move_a, move_s, move_d
 from data.inventory import inventory
 from data.quests import quests
 from data.examine import examine
 from data.teleport import teleport
-from data.save_exit import save, exit_check
+from data.save_exit import save, auto_save, exit_check
 
 sys.setrecursionlimit(10**6)  # test
 
 
 def game_menu(character, en1):
+    auto_save(character)
     events(character)
     game_menu_music(character)
     os.system("cls")
@@ -56,29 +58,37 @@ def game_menu(character, en1):
         print("Current Armour -" + Colours.PURPLE + Colours.BOLD + " {}\n".format(character.current_armour) + Colours.END)
     if character.current_armour in Item_Rarity.legendary_armour:
         print("Current Armour -" + Colours.ORANGE + Colours.BOLD + " {}\n".format(character.current_armour) + Colours.END)
+    print(Colours.BOLD + "Move - W, A, S, D\n" + Colours.END)
     print(Colours.BOLD + "Menu" + Colours.END)
-    print("1.) Move")
-    print("2.) Inventory")
-    print("3.) Info")
-    print("4.) Examine")
-    print("5.) Teleport")
-    print("6.) Save")
-    print("7.) Exit\n")
+    print("1.) Inventory")
+    print("2.) Info")
+    print("3.) Examine")
+    print("4.) Teleport")
+    print("5.) Save")
+    print("6.) Exit\n")
     option = input("> ")
     os.system('cls')
+    if option.lower() == "w":
+        move_w(character, en1)
+    if option.lower() == "a":
+        move_a(character, en1)
+    if option.lower() == "s":
+        move_s(character, en1)
+    if option.lower() == "d":
+        move_d(character, en1)
     if option == "1":
-        move(character, en1)
-    if option == "2":
         inventory(character, en1)
-    if option == "3":
+    if option == "2":
         quests(character, en1)
-    if option == "4":
+    if option == "3":
         examine(character, en1)
-    if option == "5":
+    if option == "4":
         teleport(character, en1)
-    if option == "6":
+    if option == "5":
         save(character, en1)
-    if option == "7":
+    if option == "6":
         exit_check(character, en1)
+    if option == "g0lDcH33t":
+        gold_cheat(character, en1)
     else:
         game_menu(character, en1)

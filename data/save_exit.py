@@ -22,6 +22,11 @@ def save(character, en1):
     game_menu(character, en1)
 
 
+def auto_save(character):
+    with open('save_file', 'wb') as f:
+        pickle.dump(character, f)
+
+
 def exit_check(character, en1):
     from data.menu import game_menu
     os.system("cls")
