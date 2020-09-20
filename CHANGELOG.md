@@ -11,6 +11,8 @@ Version 1.1 - xx/09/2020
 - Added auto-save.
 - New weapon/armour set to the shop.
 - Extended the "Generic RPG Kill Quest" quest line.
+- Rare mob encounter added.
+- New legendary weapon.
 
 #### Changes
 - Fixed upper/lowercase input on picking up loot.
