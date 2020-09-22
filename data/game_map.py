@@ -443,19 +443,26 @@ def move_d(character, en1):
 
 # handles player movement
 def movement_handler(destination, character, en1):
+    from data.menu import game_menu
     character.location = destination
-    print("\n" "You have gone to " + character.location + ".\n")
     if Map.zone_map[character.location][Map.ZONE_NAME] in "town":
+        print("\n" "You have gone to " + character.location + ".\n")
         print(cut_scene_art.village)
-    elif Map.zone_map[character.location][Map.ZONE_NAME] in "forest":
+        print_location(character, en1)
+    elif character.location in ["d4", "f6"]:
         print(cut_scene_art.forest)
-    elif Map.zone_map[character.location][Map.ZONE_NAME] in "water":
+        print_location(character, en1)
+    elif character.location in ["g6", "j6"]:
         print(cut_scene_art.water)
-    elif Map.zone_map[character.location][Map.ZONE_NAME] in "desert":
+        print_location(character, en1)
+    elif character.location in ["k6", "n7"]:
         print(cut_scene_art.desert)
-    elif Map.zone_map[character.location][Map.ZONE_NAME] in "dungeon":
+        print_location(character, en1)
+    elif character.location in ["o7"]:
         print(cut_scene_art.dungeon)
-    print_location(character, en1)
+        print_location(character, en1)
+    else:
+        game_menu(character, en1)
 
 
 # description of player location & events

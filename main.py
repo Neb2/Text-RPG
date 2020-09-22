@@ -4,7 +4,7 @@
 # VERSIONS
 # 0.0 - 20/06/2020
 # 1.0 - 10/09/2020
-# 1.1 - xx/xx/2020
+# 1.1 - 23/09/2020
 
 import sys
 import os
@@ -89,5 +89,5 @@ def help_menu(character, en1):
     title_screen_selection(character, en1)
 
 
-title_screen_selection(sys.argv, sys.argv[0])
-# main(sys.argv, sys.argv[0])
+# title_screen_selection(sys.argv, sys.argv[0])
+main(sys.argv, sys.argv[0])

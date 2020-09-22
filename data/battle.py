@@ -6,8 +6,8 @@ from data.level import level
 from data.quests import quest_tracker
 from data.enemies import Enemy, Mobs
 from data.music import fight_music, win_music, defeat_music
-from data.loot import loot1, loot2, loot3, loot4, baron_loot
-from data.art import F_Mobs, W_Mobs, D_Mobs, C_Mobs, Colours, player_health_bar, enemy_health_bar, player_attack_bar
+from data.loot import loot1, loot2, loot3, loot4, baron_loot, alien_loot
+from data.art import F_Mobs, W_Mobs, D_Mobs, C_Mobs, Colours, player_health_bar, enemy_health_bar, player_attack_bar, easter_egg_mob
 
 sys.setrecursionlimit(10**6)  # test
 
@@ -26,6 +26,8 @@ def enemy_gen(character):
     en1 = Mobs.enemy_gen(Enemy, character)
     if en1.name == "Baron of Hell":
         print("You have encountered the {}.".format(en1.name))
+    elif en1.name == "Alien":
+        print("You have encountered an Alien, he must be in the wrong game...")
     else:
         print("You have encountered a {}.".format(en1.name))
     enemy_print(en1, character)
@@ -42,6 +44,8 @@ def enemy_print(en1, character):
         print(F_Mobs.bear)
     elif en1.name == "Goblin":
         print(F_Mobs.goblin)
+    elif en1.name == "Strange Man":
+        print(F_Mobs.strange_man)
     elif en1.name == "Shark":
         print(W_Mobs.shark)
     elif en1.name == "Giant Blowfish":
@@ -62,6 +66,8 @@ def enemy_print(en1, character):
         print(C_Mobs.demon)
     elif en1.name == "Baron of Hell":
         print(C_Mobs.baron_of_hell)
+    elif en1.name == "Alien":
+        easter_egg_mob()
     fight_music(character, en1)
 
 
@@ -290,6 +296,11 @@ def end_fight_win(character, en1):
     win_music(character)
     print("You defeated {}.\n".format(en1.name))
     en1.hp = en1.max_hp
+    if en1.name in ["Strange Man"]:
+        input(">...")
+        print("You murder the strange man, search his corpse, and find ....5 gold.")
+        input(">...")
+        character.gold += 5
     if en1.name in ["Spider", "Bear", "Giant Frog", "Goblin"]:
         if character.d4_event_2:
             print(en1.name + " dropped x 5 " + Colours.BOLD + Colours.GREEN + "[Light Health Potion]" + Colours.END + ".")
@@ -332,6 +343,15 @@ def end_fight_win(character, en1):
         if character.xp1 >= character.xp2:
             level(character)
         loot4(character, en1)
+    elif en1.name in ["Alien"]:
+        if character.level == 10:
+            character.xp1 += 0
+        else:
+            character.xp1 += 50
+            print("You gained 50 XP.")
+        if character.xp1 >= character.xp2:
+            level(character)
+        alien_loot(character, en1)
     elif en1.name in ["Baron of Hell"]:
         if character.level == 10:
             character.xp1 += 0

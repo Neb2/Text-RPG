@@ -113,10 +113,26 @@ def examine(character, en1):
                         character.completed_quests.append({"name": Quest_0.slay_monsters})
                         character.d3_event_2 = False
                         character.d3_event_3 = True
+                        character.d5_event_1 = True
+                        character.d5_event_2 = True
                         if character.xp1 >= character.xp2:
                             level(character)
                             input(">...")
         elif character.d3_event_3:
+            print(Map.zone_map[character.location][Map.EXAMINE])
+            input(">...")
+    elif character.location == "d5":
+        if character.d5_event_2:
+            print("Do you wish to confront the strange man about your stolen gold? Y/N")
+            player_input = input("> ")
+            if player_input.lower() == "y":
+                print("You walk up to the strange man, but he looks angry, seems like the only way to get your gold\n"
+                      "back is to fight him.")
+                input(">...")
+                enemy_gen(character)
+            elif player_input.lower() == "n":
+                print("You decide to leave the strange man alone as it's not worth the effort to get your gold back.")
+        else:
             print(Map.zone_map[character.location][Map.EXAMINE])
             input(">...")
     elif character.location == 'e2':
@@ -166,7 +182,7 @@ def examine(character, en1):
                         print("The quest master congratulates you, and hands you your rewards.")
                         input(">...")
                         print("You gain 500 gold.")
-                        print("You gain 100 XP.")
+                        print("You gain 200 XP.")
                         print("You obtain " + Colours.BOLD + Colours.ORANGE + "[Teleportation Stone]" + Colours.END + ".")
                         input(">...")
                         character.misc_items.clear()
@@ -180,7 +196,7 @@ def examine(character, en1):
                                 del character.active_quests[i]
                                 break
                         character.completed_quests.append({"name": Quest_0.baron_of_hell})
-                        character.xp1 += 100
+                        character.xp1 += 200
                         if character.xp1 >= character.xp2:
                             level(character)
                             input(">...")
@@ -274,12 +290,14 @@ def examine(character, en1):
             print("+ 2 " + Colours.BOLD + Colours.PURPLE + "[Max Health Potion]" + Colours.END)
             input(">...")
         else:
+            print(Map.zone_map[character.location][Map.EXAMINE])
+            input(">...")
             encounter = random.randint(1, 10)
             if encounter in range(1, 10):
                 enemy_gen(character)
             else:
                 game_menu(character, en1)
-    elif character.location in ["c7", "c5", "c6", "d5", "d6", "d7", "d8", "e5", "e6", "e7", "f5", "h6", "j6", "k5", "k7", "l6",
+    elif character.location in ["c7", "c5", "c6", "d6", "d7", "d8", "e5", "e6", "e7", "f5", "h6", "j6", "k5", "k7", "l6",
                                 "m6", "m7", "o8", "o9", "o10", "p10"]:
         print(Map.zone_map[character.location][Map.EXAMINE])
         input(">...")

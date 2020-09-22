@@ -3,7 +3,7 @@ Changelog
 
 [Unreleased]
 -
-Version 1.1 - xx/09/2020
+Version 1.1 - 23/09/2020
 -
 #### Added
 - Added a must enter Y/N for loot.

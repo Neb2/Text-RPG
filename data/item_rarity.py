@@ -10,7 +10,7 @@ class Item_Rarity:
     epic_weapons = ["[Dragon Sword] + (60 ATK)",  "[General Store Sword] + (80 ATK)"]
 
     # legendary - orange
-    legendary_weapons = ["[Sunfury, Cursed Axe of the Breezeseeker] + (100 ATK)"]
+    legendary_weapons = ["[Sunfury, Cursed Axe of the Breezeseeker] + (100 ATK)", "[Alien Probe] + (1 ATK)"]
 
     # armour
     # uncommon - green

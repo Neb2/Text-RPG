@@ -16,6 +16,12 @@ def events(character):
             print("As you enter the forest, you feel as if you are being watched by something.")
             input(">...")
             enemy_gen(character)
+    if character.location == "d5":
+        if character.d5_event_1:
+            print("As you walk back into the forest again, you see the strange man hiding, rather poorly, behind a bush.\n"
+                  "If you want your gold back you should go and talk to him.")
+            input(">...")
+            event_check(character)
     if character.location == "f6":
         if character.f6_event_2:
             print("As you walk towards the river you hear something run up from behind you.")
@@ -43,11 +49,6 @@ def events(character):
                   "ambushed when doing so.")
             input(">...")
             enemy_gen(character)
-    # if character.location == "d7":
-    #     if character.d7_event_1:
-    #         print("testtesttest")
-    #         input(">...")
-    #         event_check(character)
 
 
 def event_check(character):
@@ -57,6 +58,9 @@ def event_check(character):
     if character.location == "d4":
         if character.d4_event_1:
             character.d4_event_1 = False
+    if character.location == "d5":
+        if character.d5_event_1:
+            character.d5_event_1 = False
     if character.location == "f6":
         if character.f6_event_2:
             character.f6_event_2 = False
@@ -72,6 +76,4 @@ def event_check(character):
     if character.location == "q10":
         if character.q10_event_1:
             character.q10_event_1 = False
-    # if character.location == "d7":
-    #     if character.d7_event_1:
-    #         character.d7_event_1 = False
+

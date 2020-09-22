@@ -49,6 +49,8 @@ class Player:
         self.d3_event_4 = True
         self.d4_event_1 = True
         self.d4_event_2 = True
+        self.d5_event_1 = False
+        self.d5_event_2 = False
         self.e2_event_1 = True
         self.e2_event_2 = False
         self.e2_event_3 = False
@@ -92,6 +94,8 @@ class Player:
     @property
     def current_atk(self):
         current_atk = self.base_atk
+        if self.current_weapon == "[Alien Probe] + (1 ATK)":
+            current_atk += 1
         if self.current_weapon == "[Wooden Sword] + (10 ATK)":
             current_atk += 10
         if self.current_weapon == "[Bronze Sword] + (15 ATK)":
