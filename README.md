@@ -24,6 +24,10 @@ The main goals for this project are to implement the following features.
 
 How to Play
 -
+OS: Windows is supported.
+
+OS: Mac/Linux is not supported.
+
 The colored package is required to run this game.
 https://gitlab.com/dslackw/colored
 
