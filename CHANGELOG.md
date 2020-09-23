@@ -3,6 +3,20 @@ Changelog
 
 [Unreleased]
 -
+Version 1.2 - xx/xx/2020
+-
+#### Added
+
+-
+
+
+#### Changes
+
+-
+
+[Released]
+-
+
 Version 1.1 - 23/09/2020
 -
 #### Added
@@ -20,8 +34,7 @@ Version 1.1 - 23/09/2020
 - Prices of all weapons/armour in shop have been changed.
 - Changed art display on each movement.
 
-[Released]
--
+
 Version 1.0 - 10/09/2020
 -
 - First version of the game released for testing.
