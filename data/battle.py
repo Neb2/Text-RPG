@@ -208,7 +208,6 @@ def spell_choice(character, en1):
             character.b_atk_p -= regen.cost
             character_range = random.randint(character.atk_l, character.atk_h)
             character_heal = character_range + regen.dmg + character.current_atk
-            print(character_range)
             if character_heal + character.hp >= character.max_hp:
                 print("Your [Regenerate] heals for {} HP.".format(character.max_hp - character.hp))
                 character.hp += character_heal

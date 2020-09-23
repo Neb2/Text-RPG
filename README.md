@@ -43,7 +43,7 @@ Combat
 
 UI
 
-![](https://i.imgur.com/22ftS58.png)
+![](https://i.imgur.com/xg7dMfC.png)
 
 Shop
 
